@@ -2,139 +2,102 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Énigme cryptique</title>
+<title>Énigme I</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Georgia', serif;
-        background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
-        color: #eee;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(160deg, #000428, #004e92);
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .enigme {
-        background: rgba(0,0,0,0.65);
-        border-radius: 25px;
-        padding: 40px;
-        max-width: 700px;
-        width: 90%;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-        text-align: center;
-    }
+.box {
+    background: rgba(0,0,0,0.7);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
 
-    h1 {
-        font-size: 2.4em;
-        margin-bottom: 10px;
-        color: #ffcc70;
-    }
+h1 {
+    color: #ffcc70;
+    margin-bottom: 20px;
+}
 
-    .subtitle {
-        font-style: italic;
-        color: #bbb;
-        margin-bottom: 30px;
-    }
+.symbols {
+    font-size: 3em;
+    margin: 30px 0;
+}
 
-    .rebus {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 25px;
-        font-size: 2.6em;
-        margin-bottom: 30px;
-    }
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 350px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1em;
+}
 
-    .case {
-        background: rgba(255,255,255,0.08);
-        border-radius: 18px;
-        padding: 20px;
-        box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-    }
+button {
+    margin-top: 15px;
+    padding: 12px 40px;
+    font-size: 1em;
+    border-radius: 30px;
+    border: none;
+    background: #ffcc70;
+    cursor: pointer;
+}
 
-    .hint {
-        font-size: 0.9em;
-        margin-top: 25px;
-        color: #aaa;
-    }
-
-    input {
-        margin-top: 20px;
-        padding: 12px;
-        width: 80%;
-        max-width: 350px;
-        border-radius: 12px;
-        border: none;
-        font-size: 1em;
-    }
-
-    button {
-        margin-top: 15px;
-        padding: 12px 40px;
-        font-size: 1em;
-        border-radius: 30px;
-        border: none;
-        background: #ffcc70;
-        color: #222;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .result {
-        margin-top: 25px;
-        font-weight: bold;
-        font-size: 1.2em;
-    }
-
-    .success { color: #7CFF7C; }
-    .error { color: #FF6B6B; }
+.result {
+    margin-top: 25px;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
 
-<div class="enigme">
-    <h1>🎭 L'Énigme du Chapiteau</h1>
-    <div class="subtitle">Tout n’est pas à prendre tel quel…</div>
+<div class="box">
+    <h1>🎭 Énigme I</h1>
 
-    <div class="rebus">
-        <div class="case">CIR🪚</div>
-        <div class="case">🧊 + QUE</div>
-        <div class="case">DU</div>
-        <div class="case">SO🔑</div>
-        <div class="case">☀️</div>
+    <p>
+        Il n’a ni murs ni scène fixe.<br>
+        Il voyage, se transforme, émerveille.<br>
+        Son cœur ne bat pas… il brûle.
+    </p>
+
+    <div class="symbols">
+        🎭 🔄 ☀️
     </div>
 
-    <div class="hint">
-        Indice : enlève, écoute, assemble.
-    </div>
+    <p>Nom complet :</p>
 
-    <input id="answer" placeholder="Nom complet recherché">
+    <input id="rep">
     <br>
-    <button onclick="verifier()">Valider</button>
+    <button onclick="check()">Valider</button>
 
-    <div id="result" class="result"></div>
+    <div id="res" class="result"></div>
 </div>
 
 <script>
-function verifier() {
-    const val = document.getElementById("answer").value
+function check() {
+    const v = document.getElementById("rep").value
         .toLowerCase()
-        .normalize("NFD")
+        .normalize("nfd")
         .replace(/[\u0300-\u036f]/g, "");
 
-    const res = document.getElementById("result");
-
-    if (val === "cirque du soleil") {
-        res.textContent = "🎉 Exact ! Le mystère mène au Cirque du Soleil 🎪🌞";
-        res.className = "result success";
+    if (v === "cirque du soleil") {
+        document.getElementById("res").textContent = "✔️ Exact… poursuis le voyage.";
+        setTimeout(() => {
+            window.location.href = "enigme2.html";
+        }, 2000);
     } else {
-        res.textContent = "❌ Ce n’est pas encore ça… observe autrement.";
-        res.className = "result error";
+        document.getElementById("res").textContent = "❌ Observe ce qui se déplace…";
     }
 }
 </script>
