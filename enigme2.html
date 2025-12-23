@@ -78,7 +78,10 @@ function check() {
     const res = document.getElementById("res");
 
     if (v === "londres") {
-        res.textContent = "🎉 Exact ! Tu as trouvé Londres.";
+        res.textContent = "✔️ OUIIIIIIIIIIIIIIIIII.";
+        setTimeout(() => {
+            window.location.href = "enigme3.html";
+        }, 2000);
     } else {
         res.textContent = "❌ Pense à l’heure…";
     }
