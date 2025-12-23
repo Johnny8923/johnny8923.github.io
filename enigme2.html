@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Énigme II</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(160deg, #1c1c1c, #3a3a3a);
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    background: rgba(0,0,0,0.75);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+h1 {
+    color: #c62828;
+}
+
+.symbols {
+    font-size: 3em;
+    margin: 30px 0;
+}
+
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 350px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1em;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px 40px;
+    font-size: 1em;
+    border-radius: 30px;
+    border: none;
+    background: #c62828;
+    color: white;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 25px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h1>⏰ Énigme II</h1>
+
+    <p>
+        Ici, le temps est une institution.<br>
+        Les couronnes ne sont pas que symboles.<br>
+        La pluie n’effraie personne.
+    </p>
+
+    <div class="symbols">
+        ⏰ 👑 🌧️
+    </div>
+
+    <p>Un seul mot :</p>
+
+    <input id="rep">
+    <br>
+    <button onclick="check()">Valider</button>
+
+    <div id="res" class="result"></div>
+</div>
+
+<script>
+function check() {
+    const v = document.getElementById("rep").value
+        .toLowerCase()
+        .normalize("nfd")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    if (v === "londres") {
+        document.getElementById("res").textContent = "🎉 Exact ! Tu as trouvé Londres.";
+    } else {
+        document.getElementById("res").textContent = "❌ Pense à l’heure…";
+    }
+}
+</script>
+
+</body>
+</html>
