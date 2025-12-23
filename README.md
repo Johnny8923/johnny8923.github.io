@@ -2,126 +2,139 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Rébus mystérieux</title>
+<title>Énigme cryptique</title>
 <style>
     body {
         margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #1d2671, #c33764);
-        color: #fff;
+        font-family: 'Georgia', serif;
+        background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+        color: #eee;
         min-height: 100vh;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
     }
 
-    .card {
-        background: rgba(255, 255, 255, 0.95);
-        color: #333;
+    .enigme {
+        background: rgba(0,0,0,0.65);
         border-radius: 25px;
-        padding: 35px 45px;
-        max-width: 600px;
+        padding: 40px;
+        max-width: 700px;
         width: 90%;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         text-align: center;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.35);
     }
 
     h1 {
-        margin-top: 0;
-        font-size: 2.3em;
-        color: #c33764;
+        font-size: 2.4em;
+        margin-bottom: 10px;
+        color: #ffcc70;
+    }
+
+    .subtitle {
+        font-style: italic;
+        color: #bbb;
+        margin-bottom: 30px;
     }
 
     .rebus {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        font-size: 4.2em;
-        margin: 35px 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 25px;
+        font-size: 2.6em;
+        margin-bottom: 30px;
     }
 
-    .plus {
-        font-size: 0.6em;
-        color: #bbb;
+    .case {
+        background: rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+    }
+
+    .hint {
+        font-size: 0.9em;
+        margin-top: 25px;
+        color: #aaa;
     }
 
     input {
+        margin-top: 20px;
         padding: 12px;
         width: 80%;
-        max-width: 320px;
-        font-size: 1em;
+        max-width: 350px;
         border-radius: 12px;
-        border: 2px solid #ddd;
-        outline: none;
-        margin-top: 10px;
+        border: none;
+        font-size: 1em;
     }
 
     button {
-        margin-top: 18px;
-        padding: 12px 35px;
+        margin-top: 15px;
+        padding: 12px 40px;
         font-size: 1em;
-        border: none;
         border-radius: 30px;
-        background: #c33764;
-        color: white;
+        border: none;
+        background: #ffcc70;
+        color: #222;
         cursor: pointer;
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
     button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
 
     .result {
-        margin-top: 22px;
+        margin-top: 25px;
         font-weight: bold;
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
 
-    .success {
-        color: #2e7d32;
-    }
-
-    .error {
-        color: #c62828;
-    }
+    .success { color: #7CFF7C; }
+    .error { color: #FF6B6B; }
 </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>🧩 Déchiffre le rébus</h1>
+<div class="enigme">
+    <h1>🎭 L'Énigme du Chapiteau</h1>
+    <div class="subtitle">Tout n’est pas à prendre tel quel…</div>
 
     <div class="rebus">
-        🎪 <span class="plus">+</span> 🌞
+        <div class="case">CIR🪚</div>
+        <div class="case">🧊 + QUE</div>
+        <div class="case">DU</div>
+        <div class="case">SO🔑</div>
+        <div class="case">☀️</div>
     </div>
 
-    <p>Entre le nom complet :</p>
+    <div class="hint">
+        Indice : enlève, écoute, assemble.
+    </div>
 
-    <input type="text" id="answer" placeholder="Ta réponse ici">
+    <input id="answer" placeholder="Nom complet recherché">
     <br>
-    <button onclick="check()">Valider</button>
+    <button onclick="verifier()">Valider</button>
 
     <div id="result" class="result"></div>
 </div>
 
 <script>
-function check() {
-    const value = document.getElementById("answer").value
+function verifier() {
+    const val = document.getElementById("answer").value
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
-    const result = document.getElementById("result");
+    const res = document.getElementById("result");
 
-    if (value === "cirque du soleil") {
-        result.textContent = "🎉 Bravo ! Tu as trouvé le Cirque du Soleil 🎪🌞";
-        result.className = "result success";
+    if (val === "cirque du soleil") {
+        res.textContent = "🎉 Exact ! Le mystère mène au Cirque du Soleil 🎪🌞";
+        res.className = "result success";
     } else {
-        result.textContent = "❌ Ce n'est pas encore la bonne réponse…";
-        result.className = "result error";
+        res.textContent = "❌ Ce n’est pas encore ça… observe autrement.";
+        res.className = "result error";
     }
 }
 </script>
